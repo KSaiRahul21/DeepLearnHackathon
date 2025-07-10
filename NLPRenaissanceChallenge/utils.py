@@ -116,8 +116,23 @@ def pad_and_resize_images(folder_path):
         for f in skipped_files:
             print(f"- {f}")
 
+# def pdf_to_images(pdf_path, output_folder):
+#     pdf_document = fitz.open(pdf_path)
+
 def pdf_to_images(pdf_path, output_folder):
     pdf_document = fitz.open(pdf_path)
+
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+    for page_number in range(len(pdf_document)):
+        page = pdf_document.load_page(page_number)
+        pix = page.get_pixmap(dpi=300)  # You can adjust DPI for image quality
+        output_path = os.path.join(output_folder, f"page_{page_number + 1}.png")
+        pix.save(output_path)
+
+    pdf_document.close()
+
 def split_and_save_image(image_path, output_folder, last_image_number):
     # Read the image
     img = cv2.imread(image_path)
