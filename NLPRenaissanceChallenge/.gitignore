@@ -1,0 +1,10 @@
+/images
+/data/CorrectedData
+/outputCorrected
+
+
+# Ignore all .zip files
+*.zip
+
+# Ignore all __pycache__ folders
+__pycache__/
