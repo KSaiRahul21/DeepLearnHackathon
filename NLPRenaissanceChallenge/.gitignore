@@ -9,5 +9,3 @@
 # Ignore all __pycache__ folders
 __pycache__/
 
-#Ignore CRAFT
-CRAFT-pytorch
