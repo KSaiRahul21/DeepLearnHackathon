@@ -141,16 +141,19 @@ def split_and_save_image(image_path, output_folder, last_image_number):
     _, width, _ = img.shape
 
     # You can alter these, to get the optimum values for both
-    width_for_single_page, width_for_dual_pages = 350, 450
+    #width_for_single_page, width_for_dual_pages = 350, 450 #original
+    width_cutoff = 1270
+    # for imgsUnProcessed width for page_1.png is 1267, width for page_2 is 2542, 3 is 2488
+    # for imgsUnProcessed2 width for page_1.png is 1116, width for page_2 is 2366, 3 is 2352
 
     # Determine filename based on width and last image number
-    if width < width_for_single_page:
+    if width < width_cutoff:
         filename = f"image_{last_image_number}.png"
         output_path = os.path.join(output_folder, filename)
         cv2.imwrite(output_path, img)
         last_image_number += 1
 
-    elif width > width_for_dual_pages:
+    elif width > width_cutoff:
         left_half = img[:, :width // 2]
         right_half = img[:, width // 2:]
         filename = f"image_{last_image_number}.png"
@@ -163,6 +166,7 @@ def split_and_save_image(image_path, output_folder, last_image_number):
         last_image_number += 1
 
     return last_image_number
+
 def process_images(image_folder, output_folder):
     # Initialize image counter, starting from 1
     last_image_number = 1
