@@ -9,3 +9,5 @@
 # Ignore all __pycache__ folders
 __pycache__/
 
+#ignore model files
+*.h5
